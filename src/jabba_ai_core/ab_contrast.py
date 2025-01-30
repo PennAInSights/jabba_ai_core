@@ -105,6 +105,8 @@ def getSliceWeights(model, stack, zBatchSize = 32):
 
     return(chanceContrastList)
 
+
+
 def main():
 
     my_parser = argparse.ArgumentParser(description='Identify contrast enhanced volumes')
@@ -143,7 +145,6 @@ def main():
         print( "Chance of contrast: " + '{:.4f}'.format( np.mean(chances) ) )
     else:
         print( '{:.4f}'.format( np.mean(chances) ) )
-
 
 
 if __name__=="__main__":
