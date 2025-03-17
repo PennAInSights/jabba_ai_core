@@ -3,8 +3,10 @@ README.md
 pyproject.toml
 src/jabba_ai_core/__init__.py
 src/jabba_ai_core/ab_contrast.py
+src/jabba_ai_core/ab_fats.py
 src/jabba_ai_core/ab_liver.py
 src/jabba_ai_core/ab_organ.py
+src/jabba_ai_core/ab_slab.py
 src/jabba_ai_core/ab_spleen.py
 src/jabba_ai_core/double.py
 src/jabba_ai_core/example.py

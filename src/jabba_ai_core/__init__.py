@@ -8,6 +8,9 @@ from .ab_contrast import AbContrast
 from .ab_organ import AbOrgan
 from .ab_liver import AbLiver
 from .ab_spleen import AbSpleen
+from .ab_slab import AbSlab
+from .ab_fats import AbFats
+from .ab_muscles import AbMuscles
 
 __all__ = [
     "example",
@@ -16,5 +19,8 @@ __all__ = [
     "AbContrast",
     "AbOrgan",
     "AbLiver",
-    "AbSpleen"
+    "AbSpleen",
+    "AbSlab",
+    "AbFats",
+    "AbMuscles"
 ]
