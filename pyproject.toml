@@ -29,7 +29,7 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
 ]
 dependencies = [
-  "tensorflow",
+  "tensorflow==2.9.1",
   "numpy",
   "SimpleITK",
   "torch",
