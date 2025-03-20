@@ -54,6 +54,7 @@ def main():
     predictor = AbSpleen()
     predictor.SetDebugOn()
     predictor.SetImage(img)
+    predictor.SetModel(AbSpleen.model)
     predictor.Update()
     organ = predictor.GetOutput()
 
