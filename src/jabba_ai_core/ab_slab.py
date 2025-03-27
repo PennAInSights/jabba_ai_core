@@ -13,6 +13,8 @@ from jabba_ai_core.core.jabba_custom_objects import get_jabba_custom_objects
 
 class AbSlab(ip.ImagePredictLikelihood):
 
+    model=None
+
     def __init__(self,custom_objects={}):
         #print("custom objects length: " + str(len(custom_objects)))
         super().__init__(custom_objects=custom_objects)
@@ -95,11 +97,7 @@ def main():
     my_parser.add_argument('-v', '--verbose', help="verbose output", action='store_true', default=False)
     args = my_parser.parse_args()
 
-    #tf.disable_eager_execution()
-    # Suppress TensorFlow's warning messages
-    tf.get_logger().setLevel('ERROR')
-    tf.autograph.set_verbosity(0)
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+    AbSlab.model =  tf.keras.models.load_model(args.model, custom_objects=get_jabba_custom_objects())
 
     img = sitk.ReadImage(args.input, sitk.sitkFloat32)
     if img.GetDimension() != 3:
@@ -109,7 +107,6 @@ def main():
     predictor = AbSlab(custom_objects=get_jabba_custom_objects())
     predictor.SetDebugOn()
     predictor.SetImage(img)
-    predictor.LoadModel(args.model)
     predictor.Update()
     slabRegion = predictor.GetOutput()
     if args.verbose:
@@ -119,6 +116,8 @@ def main():
     if args.output:
         outImg = predictor.GetExtractedImage()
         sitk.WriteImage(outImg, args.output)
+    if (not args.output) and (not args.verbose):
+        print( str(slabRegion['Index'][2]) + ',' + str(slabRegion['Size'][2]) )
 
 if __name__=="__main__":
     sys.exit(main())

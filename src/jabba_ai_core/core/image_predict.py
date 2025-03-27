@@ -13,8 +13,10 @@ import jabba_ai_core.core.sitk_utils as sitku
 # Base class for using images to make deep learning based predictions
 class ImagePredict():
 
+    model=None
+
     def __init__(self, custom_objects={}):
-        self.model=None
+        #self.model=None
         self.predictions=None
         self.debug=False
         self.prepped=None        # Image prepped for prediction

@@ -13,6 +13,8 @@ from jabba_ai_core.core.jabba_custom_objects import get_jabba_custom_objects
 
 class AbFats(ip.ImagePredictImageSlices):
 
+    model = None
+
     def __init__(self, region=None, custom_objects={}):
         super().__init__(custom_objects=custom_objects)
 
@@ -103,7 +105,6 @@ def main():
     predictor = AbFats(custom_objects=get_jabba_custom_objects())
     predictor.SetDebugOn()
     predictor.SetImage(img)
-    predictor.LoadModel(args.model)
     if args.z:
         index[2] = int(args.z[0])
         size[2] = int(args.z[1])

@@ -56,7 +56,6 @@ def main():
     predictor = AbLiver()
     predictor.SetDebugOn()
     predictor.SetImage(img)
-    predictor.SetModel(AbLiver.model)
     predictor.Update()
     organ = predictor.GetOutput()
 

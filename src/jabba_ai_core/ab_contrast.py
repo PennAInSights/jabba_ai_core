@@ -13,6 +13,8 @@ from jabba_ai_core.core.jabba_custom_objects import get_jabba_custom_objects
 
 class AbContrast(ip.ImagePredictLikelihood):
 
+    model=None
+
     def __init__(self, custom_objects={}):
         super().__init__(custom_objects=custom_objects)
         self.region=None
@@ -115,29 +117,16 @@ def main():
     my_parser.add_argument('-v', '--verbose', dest="verbosity", help="verbose output", action='store_true', default=False)
     args = my_parser.parse_args()
 
-    #tf.disable_eager_execution()
-    # Suppress TensorFlow's warning messages
-    tf.get_logger().setLevel('ERROR')
-    #os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+    AbContrast.model =  tf.keras.models.load_model(args.model, custom_objects=get_jabba_custom_objects())
 
     img = sitk.ReadImage(args.input, sitk.sitkFloat32)
     if img.GetDimension() != 3:
         print("EXITING: Input image is not 3D")
         return(1)
-    
-    # FIXME - check FOV in z-direction
 
-    #modelSlice = tensorflow.keras.models.load_model(args.model)
-    #contrastChances = getSliceWeights( modelSlice, itkImg )
-    #if args.verbosity:
-    #    print(contrastChances)
-    #print( "Chance of contrast: " + str(np.mean(contrastChances)))
-
-    #print("Try with class")
     predictor = AbContrast(custom_objects=get_jabba_custom_objects())
     predictor.SetDebugOn()
     predictor.SetImage(img)
-    predictor.LoadModel(args.model)
     predictor.Update()
     chances = predictor.GetOutput()
     if args.verbosity:

@@ -1,4 +1,4 @@
-Metadata-Version: 2.2
+Metadata-Version: 2.4
 Name: jabba_ai_core
 Version: 0.0.1
 Summary: Core functions for jabba_ai_insights
@@ -220,11 +220,12 @@ Classifier: Programming Language :: Python :: 3 :: Only
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
-Requires-Dist: tensorflow
+Requires-Dist: tensorflow==2.9.1
 Requires-Dist: numpy
 Requires-Dist: SimpleITK
 Requires-Dist: torch
 Requires-Dist: monai
+Dynamic: license-file
 
 # jabba_ai_core
 Core functionality for jabba_ai based pipelines
