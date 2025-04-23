@@ -88,12 +88,6 @@ def main():
     my_parser.add_argument('-v', '--verbose', dest="verbosity", help="verbose output", action='store_true', default=False)
     args = my_parser.parse_args()
 
-    #tf.disable_eager_execution()
-    # Suppress TensorFlow's warning messages
-    tf.get_logger().setLevel('ERROR')
-    tf.autograph.set_verbosity(0)
-    #os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
     img = sitk.ReadImage(args.input, sitk.sitkFloat32)
     if img.GetDimension() != 3:
         print("EXITING: Input image is not 3D")
@@ -101,6 +95,8 @@ def main():
     
     size = list(img.GetSize())
     index = [0] * img.GetDimension()
+
+    AbFats.model =  tf.keras.models.load_model(args.model, custom_objects=get_jabba_custom_objects())
 
     predictor = AbFats(custom_objects=get_jabba_custom_objects())
     predictor.SetDebugOn()
