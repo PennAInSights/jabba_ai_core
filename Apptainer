@@ -1,0 +1,50 @@
+# Filename: pmbbvision_totalsegmentator_test.def
+
+# Build an apptainer containing a python venv with TotalSegmentator installed
+
+Bootstrap: localimage
+From: ubuntu_24.04.sif
+
+%files 
+../jabba_ai_core /opt/jabba_ai_core
+requirements.txt /opt/requirements.txt
+
+%post
+    
+# Update package lists and install necessary dependencies for deadsnakes PPA and Python build
+apt-get -y update
+apt-get -y install software-properties-common curl build-essential libssl-dev libffi-dev
+
+# Add the "deadsnakes" PPA to access Python 3.10
+add-apt-repository ppa:deadsnakes/ppa -y
+apt-get -y update
+
+# Install Python 3.10 and the venv package
+apt-get -y install python3.10 python3.10-venv
+
+
+# fix timezone
+ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
+
+
+# NOTE there are no "users" in the container; the commands
+#      here are effectively run by "root"
+
+# create a venv for installation
+python3.10 -m venv /opt/nalhutta
+. /opt/nalhutta/bin/activate
+
+# install jabba_ai_core
+/opt/nalhutta/bin/python3.10 -m pip install --upgrade pip
+/opt/nalhutta/bin/pip3.10 install -r /opt/requirements.txt
+/opt/nalhutta/bin/pip3.10 install /opt/jabba_ai_core
+
+%environment
+
+
+#export JABBA_HOME_DIR=$HOME/.jabba
+export PATH=$PATH:/opt/nalhutta/bin
+export VIRTUAL_ENV=/opt/nalhutta
+
+
