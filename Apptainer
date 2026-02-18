@@ -2,8 +2,11 @@
 
 # Build an apptainer containing a python venv with TotalSegmentator installed
 
-Bootstrap: localimage
-From: ubuntu_24.04.sif
+Bootstrap: docker
+From: ubunut:22.04
+
+#Bootstrap: localimage
+#From: ubuntu_24.04.sif
 
 %files 
 ../jabba_ai_core /opt/jabba_ai_core
