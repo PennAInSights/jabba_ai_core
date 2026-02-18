@@ -16,8 +16,10 @@ This will generate the following outputs:
 * /path/to/output_dir/myimage_imf.nii.gz
 
 ## Create virtual environment and install the package
+```
 python3.10 -m venv nalhutta
 source nalhutta/bin/activate
 nahutta/bin/pip3.10 install -r /path/to/jabba_ai_core/requirements.txt
 nalutta/bin/pip3.10 install /path/to/jabba_ai_core
+```
 
