@@ -3,7 +3,7 @@
 # Build an apptainer containing a python venv with TotalSegmentator installed
 
 Bootstrap: docker
-From: ubunut:22.04
+From: ubuntu:24.04
 
 #Bootstrap: localimage
 #From: ubuntu_24.04.sif
